@@ -5,9 +5,12 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 // const Chat = require('./Model/Messages')
 // require('./Connection/db')
+const port = 3300;
 app.use(cors());
 app.use(express.json);
-
+app.get('/',(req,res)=>{
+    res.send('Hello world')
+})
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: "http://localhost:3000",
@@ -34,10 +37,8 @@ io.on("connection", (Socket) => {
 io.on("disconnect", (Socket) => {
   console.log(Socket.id, "is disconnected");
 });
-app.get("/mes", (req, res) => {
-  res.send("Hello");
-});
 
-server.listen(3300, () => {
-  console.log("Server is Running on Port 3300");
+
+server.listen(port, () => {
+  console.log("Server is Running on Port",port);
 });
